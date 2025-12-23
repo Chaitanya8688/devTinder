@@ -1,30 +1,39 @@
 const express = require("express");
 const app = express();
 
-/*  Error-handling middleware (global) */
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    // log your error
-    res.status(500).send("something went wrong");
-  }
+const connectdb =  require("./config/database");
+const User = require("./models/user");
+
+app.use(express.json());
+
+app.post("/signup", async(req, res)=> {
+  const user = new User({
+     firstName: "virat",
+    lastName: "kohli",  
+    EmailId: "viratkohli@123",   
+    password: "kohli@123",
+
+  });
+  await user.save();
+  res.send("user send successfullly");
+
+
 });
 
-/* ✅ Route */
-app.get("/getUserData", (req, res) => {
-  // Logic of DB call and get user data
 
-  throw new Error("dvbzjh"); // forcefully throwing error
+connectdb()
+.then(()=> {
+  console.log("Database connection established");
 
-  res.send("User Data Sent");
+     app.listen(7777, () => {
+      console.log("Server is successfully listening on port 7777...");
+});
+})
+
+.catch((err) => {
+  console.error("Database not be connection establishment");
 });
 
-/* Error-handling middleware (must be after routes) */
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    res.status(500).send("Some Error contact support team");
-  }
-});
 
-app.listen(7777, () => {
-  console.log("Server is successfully listening on port 7777...");
-});
+
+

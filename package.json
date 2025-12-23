@@ -13,6 +13,8 @@
   "author": "Chaitanya",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.0.2"
   }
 }
