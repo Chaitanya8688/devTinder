@@ -36,6 +36,9 @@ create a user schema and user model
 push some documents using api calls from postman
 error handling using try, catch..
 
+what is the difference between the javascript and json
+add the express.json middleware to the app
 
 
+make your signup Api dynamic to receive the data from the end user
 

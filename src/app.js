@@ -7,18 +7,18 @@ const User = require("./models/user");
 app.use(express.json());
 
 app.post("/signup", async(req, res)=> {
-  const user = new User({
-     firstName: "virat",
-    lastName: "kohli",  
-    EmailId: "viratkohli@123",   
-    password: "kohli@123",
+  try {
+    console.log(req.body); // middleware output
 
-  });
-  await user.save();
-  res.send("user send successfullly");
+    const user = new User(req.body);
+    await user.save();
 
-
+    res.status(201).send("User created successfully");
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
 });
+
 
 
 connectdb()
@@ -33,7 +33,3 @@ connectdb()
 .catch((err) => {
   console.error("Database not be connection establishment");
 });
-
-
-
-
